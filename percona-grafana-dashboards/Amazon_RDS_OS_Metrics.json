@@ -6,145 +6,31 @@
     "gnetId": null,
     "hideControls": true,
     "id": null,
-    "links": [
-        {
-            "asDropdown": true,
-            "icon": "external link",
-            "includeVars": true,
-            "keepTime": true,
-            "tags": [
-                "OS"
-            ],
-            "targetBlank": true,
-            "title": "OS",
-            "type": "dashboards"
-        },
-        {
-            "asDropdown": true,
-            "icon": "external link",
-            "includeVars": true,
-            "keepTime": true,
-            "tags": [
-                "MySQL"
-            ],
-            "targetBlank": true,
-            "title": "MySQL",
-            "type": "dashboards"
-        },
-        {
-            "asDropdown": true,
-            "icon": "external link",
-            "includeVars": true,
-            "keepTime": true,
-            "tags": [
-                "HA"
-            ],
-            "targetBlank": true,
-            "title": "HA",
-            "type": "dashboards"
-        }
-    ],
-    "refresh": false,
+    "links": [],
     "rows": [
         {
             "collapse": false,
-            "height": "125px",
+            "height": "100px",
             "panels": [
                 {
-                    "aliasColors": {},
-                    "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": 0,
+                    "content": "# Cost\n\nAmazon provides 1 million CloudWatch API requests each month at no additional charge. Past this, it costs $0.01 per 1,000 requests. This dashboard does 15 requests on each refresh.",
+                    "datasource": "CloudWatch",
                     "editable": true,
                     "error": false,
-                    "fill": 0,
-                    "grid": {},
-                    "id": 42,
-                    "legend": {
-                        "alignAsTable": true,
-                        "avg": true,
-                        "current": false,
-                        "max": true,
-                        "min": true,
-                        "rightSide": true,
-                        "show": false,
-                        "total": false,
-                        "values": true
-                    },
-                    "lines": true,
-                    "linewidth": 2,
+                    "id": 12,
                     "links": [],
-                    "nullPointMode": "null",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [
-                        {
-                            "alias": "Size",
-                            "color": "#5195CE"
-                        }
-                    ],
+                    "mode": "markdown",
                     "span": 12,
-                    "stack": false,
-                    "steppedLine": true,
-                    "targets": [
-                        {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "min(mysql_global_status_wsrep_cluster_size * on (instance) group_left mysql_galera_variables_info{wsrep_cluster_name=\"$cluster\"})",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "Size",
-                            "metric": "",
-                            "refId": "C",
-                            "step": 300,
-                            "target": ""
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Percona XtraDB / Galera Cluster Size",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "cumulative"
-                    },
+                    "title": "",
                     "transparent": true,
-                    "type": "graph",
-                    "xaxis": {
-                        "mode": "time",
-                        "name": null,
-                        "show": false,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "label": "",
-                            "logBase": 2,
-                            "max": null,
-                            "min": 1,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": false
-                        }
-                    ]
+                    "type": "text"
                 }
             ],
             "repeat": null,
             "repeatIteration": null,
             "repeatRowId": null,
             "showTitle": false,
-            "title": "Size/Queue",
+            "title": "Cost",
             "titleSize": "h6"
         },
         {
@@ -152,528 +38,11 @@
             "height": "250px",
             "panels": [
                 {
-                    "aliasColors": {},
+                    "aliasColors": {
+                        "CPU": "#E24D42"
+                    },
                     "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 2,
-                    "grid": {},
-                    "id": 52,
-                    "legend": {
-                        "alignAsTable": true,
-                        "avg": true,
-                        "current": false,
-                        "max": true,
-                        "min": true,
-                        "show": true,
-                        "total": false,
-                        "values": true
-                    },
-                    "lines": true,
-                    "linewidth": 2,
-                    "links": [],
-                    "nullPointMode": "null",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "span": 6,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "(rate(mysql_global_status_wsrep_flow_control_paused_ns[$interval]) or irate(mysql_global_status_wsrep_flow_control_paused_ns[5m]))/1000000000 * on (instance) group_left mysql_galera_variables_info{wsrep_cluster_name=\"$cluster\"}",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ instance }}",
-                            "metric": "",
-                            "refId": "A",
-                            "step": 300
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Flow Control Paused Time",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "cumulative"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "percentunit",
-                            "logBase": 1,
-                            "max": 1,
-                            "min": 0,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        }
-                    ]
-                },
-                {
-                    "aliasColors": {},
-                    "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 2,
-                    "grid": {},
-                    "id": 53,
-                    "legend": {
-                        "alignAsTable": true,
-                        "avg": true,
-                        "current": false,
-                        "max": true,
-                        "min": true,
-                        "show": true,
-                        "total": false,
-                        "values": true
-                    },
-                    "lines": true,
-                    "linewidth": 2,
-                    "links": [],
-                    "nullPointMode": "null",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "span": 6,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "(rate(mysql_global_status_wsrep_flow_control_sent[$interval]) or irate(mysql_global_status_wsrep_flow_control_sent[5m])) * on (instance) group_left mysql_galera_variables_info{wsrep_cluster_name=\"$cluster\"}",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ instance }}",
-                            "metric": "",
-                            "refId": "A",
-                            "step": 300
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Flow Control Messages Sent",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "cumulative"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        }
-                    ]
-                }
-            ],
-            "repeat": null,
-            "repeatIteration": null,
-            "repeatRowId": null,
-            "showTitle": false,
-            "title": "FC",
-            "titleSize": "h6"
-        },
-        {
-            "collapse": false,
-            "height": "250px",
-            "panels": [
-                {
-                    "aliasColors": {},
-                    "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 6,
-                    "grid": {},
-                    "id": 9,
-                    "legend": {
-                        "alignAsTable": true,
-                        "avg": true,
-                        "current": false,
-                        "max": true,
-                        "min": true,
-                        "rightSide": false,
-                        "show": true,
-                        "total": false,
-                        "values": true
-                    },
-                    "lines": true,
-                    "linewidth": 2,
-                    "links": [],
-                    "nullPointMode": "null",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "span": 6,
-                    "stack": true,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "(rate(mysql_global_status_wsrep_received_bytes[$interval]) or irate(mysql_global_status_wsrep_received_bytes[5m])) * on (instance) group_left mysql_galera_variables_info{wsrep_cluster_name=\"$cluster\"}",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ instance }}",
-                            "metric": "",
-                            "refId": "A",
-                            "step": 300
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Writeset Inbound Traffic",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "individual"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "bytes",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        },
-                        {
-                            "format": "none",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        }
-                    ]
-                },
-                {
-                    "aliasColors": {},
-                    "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 6,
-                    "grid": {},
-                    "id": 47,
-                    "legend": {
-                        "alignAsTable": true,
-                        "avg": true,
-                        "current": false,
-                        "max": true,
-                        "min": true,
-                        "rightSide": false,
-                        "show": true,
-                        "total": false,
-                        "values": true
-                    },
-                    "lines": true,
-                    "linewidth": 2,
-                    "links": [],
-                    "nullPointMode": "null",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "span": 6,
-                    "stack": true,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "(rate(mysql_global_status_wsrep_replicated_bytes[$interval]) or irate(mysql_global_status_wsrep_replicated_bytes[5m])) * on (instance) group_left mysql_galera_variables_info{wsrep_cluster_name=\"$cluster\"}",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ instance }}",
-                            "metric": "",
-                            "refId": "A",
-                            "step": 300
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Writeset Outbound Traffic",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "individual"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "bytes",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        },
-                        {
-                            "format": "none",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        }
-                    ]
-                }
-            ],
-            "repeat": null,
-            "repeatIteration": null,
-            "repeatRowId": null,
-            "showTitle": false,
-            "title": "Traffic",
-            "titleSize": "h6"
-        },
-        {
-            "collapse": false,
-            "height": "250px",
-            "panels": [
-                {
-                    "aliasColors": {},
-                    "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 2,
-                    "grid": {},
-                    "id": 48,
-                    "legend": {
-                        "alignAsTable": true,
-                        "avg": true,
-                        "current": false,
-                        "max": true,
-                        "min": true,
-                        "show": true,
-                        "total": false,
-                        "values": true
-                    },
-                    "lines": true,
-                    "linewidth": 2,
-                    "links": [],
-                    "nullPointMode": "null",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "span": 6,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "mysql_global_status_wsrep_local_recv_queue * on (instance) group_left mysql_galera_variables_info{wsrep_cluster_name=\"$cluster\"}",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ instance }}",
-                            "metric": "",
-                            "refId": "A",
-                            "step": 300
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Receive Queue",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "cumulative"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        }
-                    ]
-                },
-                {
-                    "aliasColors": {},
-                    "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 2,
-                    "grid": {},
-                    "id": 49,
-                    "legend": {
-                        "alignAsTable": true,
-                        "avg": true,
-                        "current": false,
-                        "max": true,
-                        "min": true,
-                        "show": true,
-                        "total": false,
-                        "values": true
-                    },
-                    "lines": true,
-                    "linewidth": 2,
-                    "links": [],
-                    "nullPointMode": "null",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "span": 6,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "mysql_global_status_wsrep_local_send_queue * on (instance) group_left mysql_galera_variables_info{wsrep_cluster_name=\"$cluster\"}",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ instance }}",
-                            "metric": "",
-                            "refId": "A",
-                            "step": 300
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Send Queue",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "cumulative"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        }
-                    ]
-                }
-            ],
-            "repeat": null,
-            "repeatIteration": null,
-            "repeatRowId": null,
-            "showTitle": false,
-            "title": "Flow Control",
-            "titleSize": "h6"
-        },
-        {
-            "collapse": false,
-            "height": "250px",
-            "panels": [
-                {
-                    "aliasColors": {},
-                    "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": null,
+                    "datasource": "CloudWatch",
                     "editable": true,
                     "error": false,
                     "fill": 2,
@@ -703,22 +72,26 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "(rate(mysql_global_status_wsrep_received[$interval]) or irate(mysql_global_status_wsrep_received[5m])) * on (instance) group_left mysql_galera_variables_info{wsrep_cluster_name=\"$cluster\"}",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ instance }}",
-                            "metric": "",
+                            "alias": "CPU",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "CPUUtilization",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
                             "refId": "A",
-                            "step": 300
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
                         }
                     ],
                     "thresholds": [],
                     "timeFrom": null,
                     "timeShift": null,
-                    "title": "Transactions Received",
+                    "title": "CPU Utilization",
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
@@ -734,7 +107,8 @@
                     },
                     "yaxes": [
                         {
-                            "format": "short",
+                            "format": "percent",
+                            "label": null,
                             "logBase": 1,
                             "max": null,
                             "min": 0,
@@ -742,110 +116,21 @@
                         },
                         {
                             "format": "short",
+                            "label": null,
                             "logBase": 1,
                             "max": null,
-                            "min": 0,
+                            "min": null,
                             "show": true
                         }
                     ]
                 },
                 {
-                    "aliasColors": {},
+                    "aliasColors": {
+                        "Credits Accumulated": "#447EBC",
+                        "Credits Consumed": "#E0752D"
+                    },
                     "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 2,
-                    "grid": {},
-                    "id": 50,
-                    "legend": {
-                        "alignAsTable": true,
-                        "avg": true,
-                        "current": false,
-                        "max": true,
-                        "min": true,
-                        "show": true,
-                        "total": false,
-                        "values": true
-                    },
-                    "lines": true,
-                    "linewidth": 2,
-                    "links": [],
-                    "nullPointMode": "null",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "span": 6,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "(rate(mysql_global_status_wsrep_replicated[$interval]) or irate(mysql_global_status_wsrep_replicated[5m])) * on (instance) group_left mysql_galera_variables_info{wsrep_cluster_name=\"$cluster\"}",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ instance }}",
-                            "metric": "",
-                            "refId": "A",
-                            "step": 300
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Transactions Replicated",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "cumulative"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        }
-                    ]
-                }
-            ],
-            "repeat": null,
-            "repeatIteration": null,
-            "repeatRowId": null,
-            "showTitle": false,
-            "title": "Parallelization",
-            "titleSize": "h6"
-        },
-        {
-            "collapse": false,
-            "height": "250px",
-            "panels": [
-                {
-                    "aliasColors": {},
-                    "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": null,
+                    "datasource": "CloudWatch",
                     "editable": true,
                     "error": false,
                     "fill": 2,
@@ -857,7 +142,6 @@
                         "current": false,
                         "max": true,
                         "min": true,
-                        "rightSide": false,
                         "show": true,
                         "total": false,
                         "values": true
@@ -876,27 +160,47 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "(rate(mysql_global_status_wsrep_received_bytes[$interval]) / rate(mysql_global_status_wsrep_received[$interval]) or irate(mysql_global_status_wsrep_received_bytes[5m]) / irate(mysql_global_status_wsrep_received[5m])) * on (instance) group_left mysql_galera_variables_info{wsrep_cluster_name=\"$cluster\"}",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ instance }}",
-                            "metric": "",
+                            "alias": "Credits Accumulated",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "CPUCreditBalance",
+                            "namespace": "AWS/RDS",
+                            "period": "300",
+                            "refId": "B",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        },
+                        {
+                            "alias": "Credits Consumed",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "CPUCreditUsage",
+                            "namespace": "AWS/RDS",
+                            "period": "300",
                             "refId": "C",
-                            "step": 300
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
                         }
                     ],
                     "thresholds": [],
                     "timeFrom": null,
                     "timeShift": null,
-                    "title": "Average Incoming Transaction Size",
+                    "title": "CPU Credit Usage",
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
                         "sort": 0,
-                        "value_type": "individual"
+                        "value_type": "cumulative"
                     },
                     "type": "graph",
                     "xaxis": {
@@ -907,7 +211,8 @@
                     },
                     "yaxes": [
                         {
-                            "format": "bytes",
+                            "format": "short",
+                            "label": null,
                             "logBase": 1,
                             "max": null,
                             "min": 0,
@@ -915,90 +220,10 @@
                         },
                         {
                             "format": "short",
+                            "label": null,
                             "logBase": 1,
                             "max": null,
-                            "min": 0,
-                            "show": true
-                        }
-                    ]
-                },
-                {
-                    "aliasColors": {},
-                    "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": null,
-                    "editable": true,
-                    "error": false,
-                    "fill": 2,
-                    "grid": {},
-                    "id": 51,
-                    "legend": {
-                        "alignAsTable": true,
-                        "avg": true,
-                        "current": false,
-                        "max": true,
-                        "min": true,
-                        "rightSide": false,
-                        "show": true,
-                        "total": false,
-                        "values": true
-                    },
-                    "lines": true,
-                    "linewidth": 2,
-                    "links": [],
-                    "nullPointMode": "null",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "span": 6,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "(rate(mysql_global_status_wsrep_replicated_bytes[$interval]) / rate(mysql_global_status_wsrep_replicated[$interval]) or irate(mysql_global_status_wsrep_replicated_bytes[5m]) / irate(mysql_global_status_wsrep_replicated[5m])) * on (instance) group_left mysql_galera_variables_info{wsrep_cluster_name=\"$cluster\"}",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ instance }}",
-                            "metric": "",
-                            "refId": "C",
-                            "step": 300
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Average Replicated Transaction Size",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 0,
-                        "value_type": "individual"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "bytes",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
+                            "min": null,
                             "show": true
                         }
                     ]
@@ -1008,7 +233,829 @@
             "repeatIteration": null,
             "repeatRowId": null,
             "showTitle": false,
-            "title": "Writeset",
+            "title": "Row",
+            "titleSize": "h6"
+        },
+        {
+            "collapse": false,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "datasource": "CloudWatch",
+                    "editable": true,
+                    "error": false,
+                    "fill": 2,
+                    "grid": {},
+                    "id": 4,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": false,
+                        "max": true,
+                        "min": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "alias": "Read",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "ReadIOPS",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "A",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        },
+                        {
+                            "alias": "Write",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "WriteIOPS",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "B",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Disk Operations",
+                    "tooltip": {
+                        "msResolution": false,
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "name": null,
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "format": "iops",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": 0,
+                            "show": true
+                        },
+                        {
+                            "format": "short",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": true
+                        }
+                    ]
+                },
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "datasource": "CloudWatch",
+                    "editable": true,
+                    "error": false,
+                    "fill": 2,
+                    "grid": {},
+                    "id": 3,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": false,
+                        "max": true,
+                        "min": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "alias": "Read",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "ReadLatency",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "A",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        },
+                        {
+                            "alias": "Write",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "WriteLatency",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "B",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Disk Latency",
+                    "tooltip": {
+                        "msResolution": false,
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "name": null,
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "format": "s",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": 0,
+                            "show": true
+                        },
+                        {
+                            "format": "short",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": true
+                        }
+                    ]
+                }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": false,
+            "title": "New row",
+            "titleSize": "h6"
+        },
+        {
+            "collapse": false,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {
+                        "Outstanding IO Requests": "#BA43A9"
+                    },
+                    "bars": false,
+                    "datasource": "CloudWatch",
+                    "editable": true,
+                    "error": false,
+                    "fill": 2,
+                    "grid": {},
+                    "id": 5,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": false,
+                        "max": true,
+                        "min": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "alias": "Outstanding IO Requests",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "DiskQueueDepth",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "A",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Disk Queue Depth",
+                    "tooltip": {
+                        "msResolution": false,
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "name": null,
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "format": "short",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": 0,
+                            "show": true
+                        },
+                        {
+                            "format": "short",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": true
+                        }
+                    ]
+                },
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "datasource": "CloudWatch",
+                    "editable": true,
+                    "error": false,
+                    "fill": 2,
+                    "grid": {},
+                    "id": 6,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": false,
+                        "max": true,
+                        "min": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "alias": "Read",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "ReadThroughput",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "A",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        },
+                        {
+                            "alias": "Write",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "WriteThroughput",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "B",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Disk Throughput",
+                    "tooltip": {
+                        "msResolution": false,
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "name": null,
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "format": "Bps",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": 0,
+                            "show": true
+                        },
+                        {
+                            "format": "short",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": true
+                        }
+                    ]
+                }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": false,
+            "title": "New row",
+            "titleSize": "h6"
+        },
+        {
+            "collapse": false,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "datasource": "CloudWatch",
+                    "editable": true,
+                    "error": false,
+                    "fill": 2,
+                    "grid": {},
+                    "id": 7,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": false,
+                        "max": true,
+                        "min": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "alias": "Available",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "FreeableMemory",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "A",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Memory",
+                    "tooltip": {
+                        "msResolution": false,
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "name": null,
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "format": "bytes",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": 0,
+                            "show": true
+                        },
+                        {
+                            "format": "short",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": true
+                        }
+                    ]
+                },
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "datasource": "CloudWatch",
+                    "editable": true,
+                    "error": false,
+                    "fill": 2,
+                    "grid": {},
+                    "id": 8,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": false,
+                        "max": true,
+                        "min": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "alias": "Available",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "FreeStorageSpace",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "A",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Storage Space",
+                    "tooltip": {
+                        "msResolution": false,
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "name": null,
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "format": "bytes",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": 0,
+                            "show": true
+                        },
+                        {
+                            "format": "short",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": true
+                        }
+                    ]
+                }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": false,
+            "title": "New row",
+            "titleSize": "h6"
+        },
+        {
+            "collapse": false,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {
+                        "Used": "#EF843C"
+                    },
+                    "bars": false,
+                    "datasource": "CloudWatch",
+                    "editable": true,
+                    "error": false,
+                    "fill": 2,
+                    "grid": {},
+                    "id": 9,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": false,
+                        "max": true,
+                        "min": true,
+                        "show": true,
+                        "sortDesc": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "alias": "Used",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "SwapUsage",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "A",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Swap Usage",
+                    "tooltip": {
+                        "msResolution": false,
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "name": null,
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "format": "bytes",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": 0,
+                            "show": true
+                        },
+                        {
+                            "format": "short",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": true
+                        }
+                    ]
+                },
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "datasource": "CloudWatch",
+                    "editable": true,
+                    "error": false,
+                    "fill": 2,
+                    "grid": {},
+                    "id": 10,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": true,
+                        "current": false,
+                        "max": true,
+                        "min": true,
+                        "show": true,
+                        "total": false,
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 5,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "alias": "Inbound",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "NetworkReceiveThroughput",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "A",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        },
+                        {
+                            "alias": "Outbound",
+                            "dimensions": {
+                                "DBInstanceIdentifier": "$instance"
+                            },
+                            "expr": "",
+                            "intervalFactor": 2,
+                            "metricName": "NetworkTransmitThroughput",
+                            "namespace": "AWS/RDS",
+                            "period": "60",
+                            "refId": "B",
+                            "region": "$region",
+                            "statistics": [
+                                "Average"
+                            ]
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Network Traffic",
+                    "tooltip": {
+                        "msResolution": false,
+                        "shared": true,
+                        "sort": 0,
+                        "value_type": "cumulative"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "name": null,
+                        "show": true,
+                        "values": []
+                    },
+                    "yaxes": [
+                        {
+                            "format": "Bps",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": 0,
+                            "show": true
+                        },
+                        {
+                            "format": "short",
+                            "label": null,
+                            "logBase": 1,
+                            "max": null,
+                            "min": null,
+                            "show": true
+                        }
+                    ]
+                }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": false,
+            "title": "New row",
+            "titleSize": "h6"
+        },
+        {
+            "collapse": true,
+            "height": "250px",
+            "panels": [
+                {
+                    "content": "# Setup\n\nAdd CloudWatch datasource to Grafana with the name `CloudWatch`.\n\nCreate IAM user and attach the managed policy `CloudWatchReadOnlyAccess`. Then put the credentials in the file `~grafana/.aws/credentials`:\n```\n[default]\naws_access_key_id = youraccesskeyid\naws_secret_access_key = yoursecretaccesskey\n```",
+                    "datasource": "CloudWatch",
+                    "editable": true,
+                    "error": false,
+                    "id": 13,
+                    "isNew": true,
+                    "links": [],
+                    "mode": "markdown",
+                    "span": 12,
+                    "title": "",
+                    "type": "text"
+                }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": true,
+            "title": "Help",
             "titleSize": "h6"
         }
     ],
@@ -1017,85 +1064,41 @@
     "style": "dark",
     "tags": [
         "Percona",
-        "HA"
+        "Cloud "
     ],
     "templating": {
         "list": [
             {
-                "allFormat": "glob",
-                "auto": true,
-                "auto_count": 200,
-                "auto_min": "1s",
+                "allValue": null,
                 "current": {
-                    "text": "auto",
-                    "value": "$__auto_interval"
+                    "text": "us-west-2",
+                    "value": "us-west-2"
                 },
-                "datasource": "prometheus",
+                "datasource": "CloudWatch",
                 "hide": 0,
                 "includeAll": false,
-                "label": "Interval",
+                "label": "Region",
                 "multi": false,
-                "multiFormat": "glob",
-                "name": "interval",
-                "options": [
-                    {
-                        "selected": true,
-                        "text": "auto",
-                        "value": "$__auto_interval"
-                    },
-                    {
-                        "selected": false,
-                        "text": "1s",
-                        "value": "1s"
-                    },
-                    {
-                        "selected": false,
-                        "text": "5s",
-                        "value": "5s"
-                    },
-                    {
-                        "selected": false,
-                        "text": "1m",
-                        "value": "1m"
-                    },
-                    {
-                        "selected": false,
-                        "text": "5m",
-                        "value": "5m"
-                    },
-                    {
-                        "selected": false,
-                        "text": "1h",
-                        "value": "1h"
-                    },
-                    {
-                        "selected": false,
-                        "text": "6h",
-                        "value": "6h"
-                    },
-                    {
-                        "selected": false,
-                        "text": "1d",
-                        "value": "1d"
-                    }
-                ],
-                "query": "1s,5s,1m,5m,1h,6h,1d",
-                "refresh": 2,
-                "type": "interval"
+                "name": "region",
+                "options": [],
+                "query": "regions()",
+                "refresh": 1,
+                "regex": "",
+                "sort": 1,
+                "tagValuesQuery": null,
+                "tagsQuery": null,
+                "type": "query"
             },
             {
-                "allFormat": "glob",
-                "allValue": null,
-                "datasource": "prometheus",
+                "allValue": "",
+                "datasource": "CloudWatch",
                 "hide": 0,
                 "includeAll": false,
-                "label": "Cluster",
+                "label": "DB Instance",
                 "multi": false,
-                "multiFormat": "regex values",
-                "name": "cluster",
-                "query": "label_values(mysql_galera_variables_info, wsrep_cluster_name)",
+                "name": "instance",
+                "query": "dimension_values($region,AWS/RDS,CPUUtilization,DBInstanceIdentifier)",
                 "refresh": 1,
-                "refresh_on_load": false,
                 "regex": "",
                 "sort": 1,
                 "tagValuesQuery": null,
@@ -1105,27 +1108,17 @@
         ]
     },
     "time": {
-        "from": "now-12h",
+        "from": "now-1h",
         "to": "now"
     },
     "timepicker": {
-        "collapse": false,
-        "enable": true,
-        "notice": false,
-        "now": true,
         "refresh_intervals": [
-            "5s",
-            "10s",
-            "30s",
             "1m",
             "5m",
             "15m",
             "30m",
-            "1h",
-            "2h",
-            "1d"
+            "1h"
         ],
-        "status": "Stable",
         "time_options": [
             "5m",
             "15m",
@@ -1136,10 +1129,9 @@
             "2d",
             "7d",
             "30d"
-        ],
-        "type": "timepicker"
+        ]
     },
     "timezone": "browser",
-    "title": "PXC/Galera Cluster Overview",
+    "title": "Amazon RDS OS Metrics",
     "version": 0
 }

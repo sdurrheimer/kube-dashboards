@@ -44,7 +44,6 @@
             "type": "dashboards"
         }
     ],
-    "refresh": false,
     "rows": [
         {
             "collapse": false,
@@ -59,100 +58,19 @@
                     "error": false,
                     "fill": 2,
                     "grid": {},
-                    "id": 25,
-                    "legend": {
-                        "alignAsTable": false,
-                        "avg": false,
-                        "current": false,
-                        "hideEmpty": false,
-                        "max": false,
-                        "min": false,
-                        "rightSide": false,
-                        "show": true,
-                        "total": false,
-                        "values": false
-                    },
-                    "lines": true,
-                    "linewidth": 2,
-                    "links": [],
-                    "nullPointMode": "null",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "span": 6,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "topk(5, (rate(mysql_info_schema_user_statistics_total_ssl_connections_total{instance=\"$host\"}[$interval]) + rate(mysql_info_schema_user_statistics_total_connections{instance=\"$host\"}[$interval]))>0) or topk(5, (irate(mysql_info_schema_user_statistics_total_ssl_connections_total{instance=\"$host\"}[5m]) + irate(mysql_info_schema_user_statistics_total_connections{instance=\"$host\"}[5m]))>0)",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ user }}",
-                            "metric": "",
-                            "refId": "A",
-                            "step": 300
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Top Users by Connections",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 2,
-                        "value_type": "individual"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        }
-                    ]
-                },
-                {
-                    "aliasColors": {},
-                    "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": 2,
-                    "editable": true,
-                    "error": false,
-                    "fill": 2,
-                    "grid": {},
                     "id": 39,
                     "legend": {
-                        "alignAsTable": false,
-                        "avg": false,
+                        "alignAsTable": true,
+                        "avg": true,
                         "current": false,
-                        "hideEmpty": false,
-                        "max": false,
-                        "min": false,
-                        "rightSide": false,
+                        "max": true,
+                        "min": true,
+                        "rightSide": true,
                         "show": true,
+                        "sort": "avg",
+                        "sortDesc": true,
                         "total": false,
-                        "values": false
+                        "values": true
                     },
                     "lines": true,
                     "linewidth": 2,
@@ -163,7 +81,7 @@
                     "points": false,
                     "renderer": "flot",
                     "seriesOverrides": [],
-                    "span": 6,
+                    "span": 12,
                     "stack": false,
                     "steppedLine": false,
                     "targets": [
@@ -171,23 +89,59 @@
                             "calculatedInterval": "2m",
                             "datasourceErrors": {},
                             "errors": {},
-                            "expr": "topk(5, (rate(mysql_info_schema_user_statistics_bytes_sent_total{instance=\"$host\"}[$interval]) + rate(mysql_info_schema_user_statistics_bytes_received_total{instance=\"$host\"}[$interval]))>0) or topk(5, (irate(mysql_info_schema_user_statistics_bytes_sent_total{instance=\"$host\"}[5m]) + irate(mysql_info_schema_user_statistics_bytes_received_total{instance=\"$host\"}[5m]))>0)",
+                            "expr": "rate(mysql_global_status_aria_pagecache_write_requests{instance=\"$host\"}[$interval]) or irate(mysql_global_status_aria_pagecache_write_requests{instance=\"$host\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
-                            "legendFormat": "{{ user }}",
+                            "legendFormat": "Aria Pagecache Write Requests",
+                            "metric": "",
+                            "refId": "D",
+                            "step": 20
+                        },
+                        {
+                            "calculatedInterval": "2m",
+                            "datasourceErrors": {},
+                            "errors": {},
+                            "expr": "rate(mysql_global_status_aria_pagecache_read_requests{instance=\"$host\"}[$interval]) or irate(mysql_global_status_aria_pagecache_read_requests{instance=\"$host\"}[5m])",
+                            "interval": "$interval",
+                            "intervalFactor": 1,
+                            "legendFormat": "Aria Pagecache Read Requests",
+                            "metric": "",
+                            "refId": "C",
+                            "step": 20
+                        },
+                        {
+                            "calculatedInterval": "2m",
+                            "datasourceErrors": {},
+                            "errors": {},
+                            "expr": "rate(mysql_global_status_aria_pagecache_reads{instance=\"$host\"}[$interval]) or irate(mysql_global_status_aria_pagecache_reads{instance=\"$host\"}[5m])",
+                            "interval": "$interval",
+                            "intervalFactor": 1,
+                            "legendFormat": "Aria Pagecache Reads",
                             "metric": "",
                             "refId": "A",
-                            "step": 300
+                            "step": 20
+                        },
+                        {
+                            "calculatedInterval": "2m",
+                            "datasourceErrors": {},
+                            "errors": {},
+                            "expr": "rate(mysql_global_status_aria_pagecache_writes{instance=\"$host\"}[$interval]) or irate(mysql_global_status_aria_pagecache_writes{instance=\"$host\"}[5m])",
+                            "interval": "$interval",
+                            "intervalFactor": 1,
+                            "legendFormat": "Aria Pagecache Writes",
+                            "metric": "",
+                            "refId": "B",
+                            "step": 20
                         }
                     ],
                     "thresholds": [],
                     "timeFrom": null,
                     "timeShift": null,
-                    "title": "Top Users by Traffic",
+                    "title": "Aria Pagecache Reads/Writes",
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
-                        "sort": 2,
+                        "sort": 0,
                         "value_type": "individual"
                     },
                     "type": "graph",
@@ -199,7 +153,7 @@
                     },
                     "yaxes": [
                         {
-                            "format": "bytes",
+                            "format": "short",
                             "logBase": 1,
                             "max": null,
                             "min": 0,
@@ -219,37 +173,31 @@
             "repeatIteration": null,
             "repeatRowId": null,
             "showTitle": false,
-            "title": "Connections",
+            "title": "I/O",
             "titleSize": "h6"
         },
         {
             "collapse": false,
-            "height": "250px",
+            "height": 250,
             "panels": [
                 {
                     "aliasColors": {},
                     "bars": false,
                     "datasource": "prometheus",
-                    "decimals": 2,
-                    "editable": true,
-                    "error": false,
-                    "fill": 2,
-                    "grid": {},
-                    "id": 37,
+                    "description": "The number of Aria log fsyncs.",
+                    "fill": 1,
+                    "id": 42,
                     "legend": {
-                        "alignAsTable": false,
                         "avg": false,
                         "current": false,
-                        "hideEmpty": false,
                         "max": false,
                         "min": false,
-                        "rightSide": false,
                         "show": true,
                         "total": false,
                         "values": false
                     },
                     "lines": true,
-                    "linewidth": 2,
+                    "linewidth": 1,
                     "links": [],
                     "nullPointMode": "null",
                     "percentage": false,
@@ -262,26 +210,21 @@
                     "steppedLine": false,
                     "targets": [
                         {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "topk(5, rate(mysql_info_schema_user_statistics_rows_fetched_total{instance=\"$host\"}[$interval])>0) or topk(5, irate(mysql_info_schema_user_statistics_rows_fetched_total{instance=\"$host\"}[5m])>0) or topk(5, rate(mysql_info_schema_user_statistics_rows_read_total{instance=\"$host\"}[$interval])>0) or topk(5, irate(mysql_info_schema_user_statistics_rows_read_total{instance=\"$host\"}[5m])>0)",
-                            "interval": "$interval",
+                            "expr": "rate(mysql_global_status_aria_transaction_log_syncs{instance=\"$host\"}[$interval]) or irate(mysql_global_status_aria_transaction_log_syncs{instance=\"$host\"}[5m])",
                             "intervalFactor": 1,
-                            "legendFormat": "{{ user }}",
-                            "metric": "",
+                            "legendFormat": "Aria Transaction Log Syncs",
                             "refId": "A",
-                            "step": 300
+                            "step": 5
                         }
                     ],
                     "thresholds": [],
                     "timeFrom": null,
                     "timeShift": null,
-                    "title": "Top Users by Rows Fetched/Read",
+                    "title": "Aria Transaction Log Syncs",
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
-                        "sort": 2,
+                        "sort": 0,
                         "value_type": "individual"
                     },
                     "type": "graph",
@@ -294,16 +237,18 @@
                     "yaxes": [
                         {
                             "format": "short",
+                            "label": null,
                             "logBase": 1,
                             "max": null,
-                            "min": 0,
+                            "min": "0",
                             "show": true
                         },
                         {
                             "format": "short",
+                            "label": null,
                             "logBase": 1,
                             "max": null,
-                            "min": 0,
+                            "min": null,
                             "show": true
                         }
                     ]
@@ -312,117 +257,159 @@
                     "aliasColors": {},
                     "bars": false,
                     "datasource": "prometheus",
-                    "decimals": 2,
-                    "editable": true,
-                    "error": false,
-                    "fill": 2,
-                    "grid": {},
-                    "id": 38,
-                    "legend": {
-                        "alignAsTable": false,
-                        "avg": false,
-                        "current": false,
-                        "hideEmpty": false,
-                        "max": false,
-                        "min": false,
-                        "rightSide": false,
-                        "show": true,
-                        "total": false,
-                        "values": false
-                    },
-                    "lines": true,
-                    "linewidth": 2,
-                    "links": [],
-                    "nullPointMode": "null",
-                    "percentage": false,
-                    "pointradius": 5,
-                    "points": false,
-                    "renderer": "flot",
-                    "seriesOverrides": [],
-                    "span": 6,
-                    "stack": false,
-                    "steppedLine": false,
-                    "targets": [
-                        {
-                            "calculatedInterval": "2m",
-                            "datasourceErrors": {},
-                            "errors": {},
-                            "expr": "topk(5, rate(mysql_info_schema_user_statistics_rows_updated_total{instance=\"$host\"}[$interval])>0) or topk(5, irate(mysql_info_schema_user_statistics_rows_updated_total{instance=\"$host\"}[5m])>0)",
-                            "interval": "$interval",
-                            "intervalFactor": 1,
-                            "legendFormat": "{{ user }}",
-                            "metric": "",
-                            "refId": "A",
-                            "step": 300
-                        }
-                    ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeShift": null,
-                    "title": "Top Users by Rows Updated",
-                    "tooltip": {
-                        "msResolution": false,
-                        "shared": true,
-                        "sort": 2,
-                        "value_type": "individual"
-                    },
-                    "type": "graph",
-                    "xaxis": {
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "logBase": 1,
-                            "max": null,
-                            "min": 0,
-                            "show": true
-                        }
-                    ]
-                }
-            ],
-            "repeat": null,
-            "repeatIteration": null,
-            "repeatRowId": null,
-            "showTitle": false,
-            "title": "Rows",
-            "titleSize": "h6"
-        },
-        {
-            "collapse": false,
-            "height": "250px",
-            "panels": [
-                {
-                    "aliasColors": {},
-                    "bars": false,
-                    "datasource": "prometheus",
-                    "decimals": 2,
+                    "decimals": 0,
                     "editable": true,
                     "error": false,
                     "fill": 2,
                     "grid": {},
                     "id": 40,
                     "legend": {
-                        "alignAsTable": false,
+                        "alignAsTable": true,
                         "avg": false,
-                        "current": false,
-                        "hideEmpty": false,
+                        "current": true,
                         "max": false,
                         "min": false,
                         "rightSide": false,
                         "show": true,
+                        "sort": "avg",
+                        "sortDesc": true,
                         "total": false,
-                        "values": false
+                        "values": true
+                    },
+                    "lines": true,
+                    "linewidth": 2,
+                    "links": [],
+                    "nullPointMode": "null",
+                    "percentage": false,
+                    "pointradius": 10,
+                    "points": false,
+                    "renderer": "flot",
+                    "seriesOverrides": [
+                        {
+                            "alias": "Aria Pagecache Total Blocks",
+                            "fill": 0
+                        }
+                    ],
+                    "span": 6,
+                    "stack": false,
+                    "steppedLine": false,
+                    "targets": [
+                        {
+                            "calculatedInterval": "2m",
+                            "datasourceErrors": {},
+                            "errors": {},
+                            "expr": "mysql_global_status_aria_pagecache_blocks_not_flushed{instance=\"$host\"}",
+                            "hide": false,
+                            "interval": "$interval",
+                            "intervalFactor": 1,
+                            "legendFormat": "Aria Pagecache Blocks Not Flushed",
+                            "metric": "",
+                            "refId": "D",
+                            "step": 20
+                        },
+                        {
+                            "calculatedInterval": "2m",
+                            "datasourceErrors": {},
+                            "errors": {},
+                            "expr": "mysql_global_status_aria_pagecache_blocks_used{instance=\"$host\"}",
+                            "interval": "$interval",
+                            "intervalFactor": 1,
+                            "legendFormat": "Aria Pagecache Blocks Used",
+                            "metric": "",
+                            "refId": "A",
+                            "step": 20
+                        },
+                        {
+                            "calculatedInterval": "2m",
+                            "datasourceErrors": {},
+                            "errors": {},
+                            "expr": "mysql_global_status_aria_pagecache_blocks_unused{instance=\"$host\"}",
+                            "interval": "",
+                            "intervalFactor": 1,
+                            "legendFormat": "Aria Pagecache Blocks Unused",
+                            "metric": "",
+                            "refId": "C",
+                            "step": 5
+                        },
+                        {
+                            "expr": "mysql_global_variables_aria_pagecache_buffer_size{instance=\"$host\"} / mysql_global_variables_aria_block_size{instance=\"$host\"}",
+                            "hide": false,
+                            "intervalFactor": 1,
+                            "legendFormat": "Aria Pagecache Total Blocks",
+                            "refId": "B",
+                            "step": 5
+                        }
+                    ],
+                    "thresholds": [],
+                    "timeFrom": null,
+                    "timeShift": null,
+                    "title": "Aria Pagecache Blocks",
+                    "tooltip": {
+                        "msResolution": false,
+                        "shared": false,
+                        "sort": 2,
+                        "value_type": "individual"
+                    },
+                    "type": "graph",
+                    "xaxis": {
+                        "mode": "time",
+                        "name": null,
+                        "show": true,
+                        "values": [
+                            "current"
+                        ]
+                    },
+                    "yaxes": [
+                        {
+                            "format": "none",
+                            "logBase": 1,
+                            "max": null,
+                            "min": 0,
+                            "show": true
+                        },
+                        {
+                            "format": "short",
+                            "logBase": 1,
+                            "max": "100",
+                            "min": 0,
+                            "show": false
+                        }
+                    ]
+                }
+            ],
+            "repeat": null,
+            "repeatIteration": null,
+            "repeatRowId": null,
+            "showTitle": false,
+            "title": "Dashboard Row",
+            "titleSize": "h6"
+        },
+        {
+            "collapse": false,
+            "height": "250px",
+            "panels": [
+                {
+                    "aliasColors": {},
+                    "bars": false,
+                    "datasource": "prometheus",
+                    "decimals": 0,
+                    "editable": true,
+                    "error": false,
+                    "fill": 2,
+                    "grid": {},
+                    "id": 46,
+                    "legend": {
+                        "alignAsTable": true,
+                        "avg": false,
+                        "current": true,
+                        "max": false,
+                        "min": false,
+                        "rightSide": false,
+                        "show": true,
+                        "sort": "avg",
+                        "sortDesc": true,
+                        "total": false,
+                        "values": true
                     },
                     "lines": true,
                     "linewidth": 2,
@@ -432,7 +419,12 @@
                     "pointradius": 5,
                     "points": false,
                     "renderer": "flot",
-                    "seriesOverrides": [],
+                    "seriesOverrides": [
+                        {
+                            "alias": "% Progress",
+                            "yaxis": 2
+                        }
+                    ],
                     "span": 6,
                     "stack": false,
                     "steppedLine": false,
@@ -441,25 +433,51 @@
                             "calculatedInterval": "2m",
                             "datasourceErrors": {},
                             "errors": {},
-                            "expr": "topk(5, rate(mysql_info_schema_user_statistics_busy_seconds_total{instance=\"$host\"}[$interval])>0) or topk(5, irate(mysql_info_schema_user_statistics_busy_seconds_total{instance=\"$host\"}[5m])>0)",
+                            "expr": "mysql_global_status_innodb_onlineddl_pct_progress{instance=\"$host\"}/100",
+                            "hide": false,
+                            "interval": "",
+                            "intervalFactor": 1,
+                            "legendFormat": "% Progress",
+                            "metric": "",
+                            "refId": "D",
+                            "step": 5
+                        },
+                        {
+                            "calculatedInterval": "2m",
+                            "datasourceErrors": {},
+                            "errors": {},
+                            "expr": "rate(mysql_global_status_innodb_onlineddl_rowlog_pct_used{instance=\"$host\"}[$interval]) or irate(mysql_global_status_innodb_onlineddl_rowlog_pct_used{instance=\"$host\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
-                            "legendFormat": "{{ user }}",
+                            "legendFormat": "Row Log % Used",
+                            "metric": "",
+                            "refId": "C",
+                            "step": 20
+                        },
+                        {
+                            "calculatedInterval": "2m",
+                            "datasourceErrors": {},
+                            "errors": {},
+                            "expr": "rate(mysql_global_status_innodb_onlineddl_rowlog_rows{instance=\"$host\"}[$interval]) or irate(mysql_global_status_innodb_onlineddl_rowlog_rows{instance=\"$host\"}[5m])",
+                            "interval": "$interval",
+                            "intervalFactor": 1,
+                            "legendFormat": "Row Log Rows",
                             "metric": "",
                             "refId": "A",
-                            "step": 300
+                            "step": 20
                         }
                     ],
                     "thresholds": [],
                     "timeFrom": null,
                     "timeShift": null,
-                    "title": "Top Users by Busy Time",
+                    "title": "InnoDB Online DDL",
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
-                        "sort": 2,
+                        "sort": 0,
                         "value_type": "individual"
                     },
+                    "transparent": false,
                     "type": "graph",
                     "xaxis": {
                         "mode": "time",
@@ -469,16 +487,17 @@
                     },
                     "yaxes": [
                         {
-                            "format": "s",
+                            "format": "short",
                             "logBase": 1,
                             "max": null,
                             "min": 0,
                             "show": true
                         },
                         {
-                            "format": "short",
+                            "format": "percent",
+                            "label": "",
                             "logBase": 1,
-                            "max": null,
+                            "max": "100",
                             "min": 0,
                             "show": true
                         }
@@ -493,18 +512,19 @@
                     "error": false,
                     "fill": 2,
                     "grid": {},
-                    "id": 41,
+                    "id": 45,
                     "legend": {
-                        "alignAsTable": false,
-                        "avg": false,
+                        "alignAsTable": true,
+                        "avg": true,
                         "current": false,
-                        "hideEmpty": false,
-                        "max": false,
-                        "min": false,
+                        "max": true,
+                        "min": true,
                         "rightSide": false,
                         "show": true,
+                        "sort": "avg",
+                        "sortDesc": true,
                         "total": false,
-                        "values": false
+                        "values": true
                     },
                     "lines": true,
                     "linewidth": 2,
@@ -523,23 +543,47 @@
                             "calculatedInterval": "2m",
                             "datasourceErrors": {},
                             "errors": {},
-                            "expr": "topk(5, rate(mysql_info_schema_user_statistics_cpu_time_seconds_total{instance=\"$host\"}[$interval])>0) or topk(5, irate(mysql_info_schema_user_statistics_cpu_time_seconds_total{instance=\"$host\"}[5m])>0)",
+                            "expr": "rate(mysql_global_status_innodb_defragment_count{instance=\"$host\"}[$interval]) or irate(mysql_global_status_innodb_defragment_count{instance=\"$host\"}[5m])",
                             "interval": "$interval",
                             "intervalFactor": 1,
-                            "legendFormat": "{{ user }}",
+                            "legendFormat": "Count",
+                            "metric": "",
+                            "refId": "D",
+                            "step": 20
+                        },
+                        {
+                            "calculatedInterval": "2m",
+                            "datasourceErrors": {},
+                            "errors": {},
+                            "expr": "rate(mysql_global_status_innodb_defragment_compression_failures{instance=\"$host\"}[$interval]) or irate(mysql_global_status_innodb_defragment_compression_failures{instance=\"$host\"}[5m])",
+                            "interval": "$interval",
+                            "intervalFactor": 1,
+                            "legendFormat": "Re-Compression Failures",
+                            "metric": "",
+                            "refId": "C",
+                            "step": 20
+                        },
+                        {
+                            "calculatedInterval": "2m",
+                            "datasourceErrors": {},
+                            "errors": {},
+                            "expr": "rate(mysql_global_status_innodb_defragment_failures{instance=\"$host\"}[$interval]) or irate(mysql_global_status_innodb_defragment_failures{instance=\"$host\"}[5m])",
+                            "interval": "$interval",
+                            "intervalFactor": 1,
+                            "legendFormat": "Failures",
                             "metric": "",
                             "refId": "A",
-                            "step": 300
+                            "step": 20
                         }
                     ],
                     "thresholds": [],
                     "timeFrom": null,
                     "timeShift": null,
-                    "title": "Top Users by CPU Time",
+                    "title": "InnoDB Defragmentation",
                     "tooltip": {
                         "msResolution": false,
                         "shared": true,
-                        "sort": 2,
+                        "sort": 0,
                         "value_type": "individual"
                     },
                     "type": "graph",
@@ -551,7 +595,7 @@
                     },
                     "yaxes": [
                         {
-                            "format": "s",
+                            "format": "short",
                             "logBase": 1,
                             "max": null,
                             "min": 0,
@@ -571,39 +615,22 @@
             "repeatIteration": null,
             "repeatRowId": null,
             "showTitle": false,
-            "title": "Busy",
+            "title": "Buffer Pool I/O",
             "titleSize": "h6"
         },
         {
             "collapse": false,
-            "height": "50px",
-            "panels": [
-                {
-                    "content": "These graphs are available only for [Percona Server](https://www.percona.com/doc/percona-server/5.6/diagnostics/user_stats.html) and [MariaDB](https://mariadb.com/kb/en/mariadb/user-statistics/) and require `userstat` variable turned on.",
-                    "datasource": "prometheus",
-                    "editable": true,
-                    "error": false,
-                    "height": "50px",
-                    "id": 36,
-                    "links": [],
-                    "mode": "markdown",
-                    "span": 12,
-                    "style": {},
-                    "title": "",
-                    "transparent": true,
-                    "type": "text"
-                }
-            ],
+            "height": 250,
+            "panels": [],
             "repeat": null,
             "repeatIteration": null,
             "repeatRowId": null,
             "showTitle": false,
-            "title": "Text",
+            "title": "Dashboard Row",
             "titleSize": "h6"
         }
     ],
-    "schemaVersion": 13,
-    "sharedCrosshair": true,
+    "schemaVersion": 14,
     "style": "dark",
     "tags": [
         "MySQL",
@@ -683,14 +710,17 @@
                 "multi": false,
                 "multiFormat": "regex values",
                 "name": "host",
-                "query": "label_values(mysql_info_schema_user_statistics_bytes_sent_total, instance)",
+                "options": [],
+                "query": "label_values(mysql_up, instance)",
                 "refresh": 1,
                 "refresh_on_load": false,
                 "regex": "",
                 "sort": 1,
                 "tagValuesQuery": null,
+                "tags": [],
                 "tagsQuery": null,
-                "type": "query"
+                "type": "query",
+                "useTags": false
             }
         ]
     },
@@ -730,6 +760,6 @@
         "type": "timepicker"
     },
     "timezone": "browser",
-    "title": "MySQL User Statistics",
-    "version": 0
+    "title": "MariaDB",
+    "version": 2
 }
